@@ -152,13 +152,3 @@ Historia Clínica
 Validaciones de negocio
 
 Transacciones complejas
-
----
-
-## Cierre conceptual
-
-✔ Sí, las tablas nuevas van en `script_schema.sql`  
-✔ Dapper **no crea ni migra** tablas  
-✔ No necesitás clases espejo de las tablas  
-✔ Los DTOs se crean según el negocio  
-✔ SQL es la fuente de verdad
