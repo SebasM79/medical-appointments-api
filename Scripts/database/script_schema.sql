@@ -1,4 +1,5 @@
- 
+USE MedicalAppointmentsDB 
+
 -- Creation Database
 create database MedicalAppointmentsDB;
 

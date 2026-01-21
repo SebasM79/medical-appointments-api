@@ -1,3 +1,4 @@
+USE MedicalAppointmentsDB
 -- TREATMENT UNITS
 INSERT INTO TreatmentUnit (name_Ut)
 VALUES 

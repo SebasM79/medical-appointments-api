@@ -1,4 +1,5 @@
---Ver agenda médica por sucursal (atencion medico con sucursal, hs y cco) endpoint GET /doctors/{id}/schedule
+USE MedicalAppointmentsDB
+--Ver agenda mï¿½dica por sucursal (atencion medico con sucursal, hs y cco) endpoint GET /doctors/{id}/schedule
 SELECT 
     d.first_name_doctor + ' ' + d.last_name_doctor AS Doctor,
     s.name_specialty AS Specialty,
@@ -15,7 +16,7 @@ INNER JOIN Office o ON ma.office_id = o.office_id
 INNER JOIN Branch b ON o.branch_id = b.branch_id
 ORDER BY b.name_branch, ma.day_of_week, ma.start_time;
 
---Turnos de un paciente “Historial y próximos turnos de un paciente”Query típica de “Mis turnos”.
+--Turnos de un paciente ï¿½Historial y prï¿½ximos turnos de un pacienteï¿½Query tï¿½pica de ï¿½Mis turnosï¿½.
 SELECT
     p.first_name_patient + ' ' + p.last_name_patient AS Patient,
     d.first_name_doctor + ' ' + d.last_name_doctor AS Doctor,
@@ -35,8 +36,8 @@ INNER JOIN Branch b ON o.branch_id = b.branch_id
 WHERE p.patient_id = 1
 ORDER BY a.appointment_datetime DESC;
 
---Ver disponibilidad de un médico (sin turnos tomados)
---“Qué horarios tiene libres un médico”
+--Ver disponibilidad de un mï¿½dico (sin turnos tomados)
+--ï¿½Quï¿½ horarios tiene libres un mï¿½dicoï¿½
 SELECT 
     d.first_name_doctor + ' ' + d.last_name_doctor AS Doctor,
     s.name_specialty AS Specialty,
@@ -60,8 +61,8 @@ AND NOT EXISTS (
 )
 ORDER BY ma.day_of_week, ma.start_time;
 
--- Cantidad de turnos por médico (estadística)
--- “Cuántos turnos tiene cada médico” (Query típica para dashboards.)
+-- Cantidad de turnos por mï¿½dico (estadï¿½stica)
+-- ï¿½Cuï¿½ntos turnos tiene cada mï¿½dicoï¿½ (Query tï¿½pica para dashboards.)
 SELECT
     d.first_name_doctor + ' ' + d.last_name_doctor AS Doctor,
     COUNT(a.appointment_id) AS TotalAppointments
@@ -73,7 +74,7 @@ GROUP BY d.first_name_doctor, d.last_name_doctor
 ORDER BY TotalAppointments DESC;
 
 -- Especialidades disponibles por sucursal
--- “Qué especialidades se atienden en esta sucursal”
+-- ï¿½Quï¿½ especialidades se atienden en esta sucursalï¿½
 SELECT DISTINCT
     s.name_specialty AS Specialty,
     tu.name_Ut AS TreatmentUnit

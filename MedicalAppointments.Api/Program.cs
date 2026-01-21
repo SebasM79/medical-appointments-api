@@ -8,6 +8,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddScoped<DoctorRepository>();
 builder.Services.AddScoped<OfficeRepository>();
 builder.Services.AddScoped<MedicalRecordRepository>();
+builder.Services.AddScoped<MedicalEpisodeRepository>();
 // 🔹 Database connection factory
 builder.Services.AddSingleton<MedicalAppointments.Api.Data.DbConnectionFactory>();
 
