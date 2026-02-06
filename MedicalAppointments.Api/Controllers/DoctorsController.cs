@@ -15,11 +15,11 @@ namespace MedicalAppointments.Api.Controllers
         }
 
         [HttpGet("{id}/schedule")] //agenda del médico
-        public IActionResult GetSchedule(int id)
+        public async Task<IActionResult> GetSchedule(int id)
         {
             try
             {
-                var schedule = _doctorRepository.GetDoctorSchedule(id);
+                var schedule = await _doctorRepository.GetDoctorScheduleAsync(id);
                 return Ok(schedule);
             }
             catch (InvalidOperationException ex)
@@ -33,30 +33,30 @@ namespace MedicalAppointments.Api.Controllers
             }
         }
         [HttpGet("{id}/availability")] //disponibilidad de médico
-        public IActionResult GetAvailability(int id)
+        public async Task<IActionResult> GetAvailability(int id)
         {
-            var result = _doctorRepository.GetDoctorAvailability(id);
+            var result = await _doctorRepository.GetDoctorAvailabilityAsync(id);
             return Ok(result);
         }
         [HttpPost("create")] //crear médico
-        public IActionResult CreateDoctor([FromBody] CreateDoctorDto doctor)
+        public async Task<IActionResult> CreateDoctor([FromBody] CreateDoctorDto doctor)
         {
             if (doctor == null)
                 return BadRequest("Doctor data is required.");
 
-        var newDoctorId = _doctorRepository.CreateDoctor(doctor);
+            var newDoctorId = await _doctorRepository.CreateDoctorAsync(doctor);
 
-        return CreatedAtAction(
-            nameof(GetSchedule),
-            new { id = newDoctorId },
-            new { DoctorId = newDoctorId }
-        );
+            return CreatedAtAction(
+                nameof(GetSchedule),
+                new { id = newDoctorId },
+                new { DoctorId = newDoctorId }
+            );
         }
         [HttpGet]
-        public IActionResult GetAllDoctors()
+        public async Task<IActionResult> GetAllDoctors()
         {
-        var doctors = _doctorRepository.GetAllDoctors();
-        return Ok(doctors);
+            var doctors = await _doctorRepository.GetAllDoctorsAsync();
+            return Ok(doctors);
         }
     }    
 }

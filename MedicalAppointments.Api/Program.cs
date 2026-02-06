@@ -11,6 +11,8 @@ builder.Services.AddScoped<MedicalRecordRepository>();
 builder.Services.AddScoped<MedicalEpisodeRepository>();
 // 🔹 Database connection factory
 builder.Services.AddSingleton<MedicalAppointments.Api.Data.DbConnectionFactory>();
+builder.Services.AddScoped<AppointmentRepository>();
+builder.Services.AddScoped<MedicalRecordRepository>();
 
 var app = builder.Build();
 

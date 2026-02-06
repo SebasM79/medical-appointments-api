@@ -17,14 +17,14 @@ namespace MedicalAppointments.Api.Controllers
         }
 
         [HttpPut("{id}/notes")]
-        public IActionResult AddNotes(int id, [FromBody] UpdateMedicalEpisodeNotesDto dto)
+        public async Task<IActionResult> AddNotes(int id, [FromBody] UpdateMedicalEpisodeNotesDto dto)
         {
             if (string.IsNullOrWhiteSpace(dto.Notes))
                 return BadRequest("Notes are required.");
 
             try
             {
-                _repository.AddNotes(id, dto.Notes);
+                await _repository.AddNotesAsync(id, dto.Notes);
                 return NoContent();
             }
             catch (SqlException ex) when (ex.Number == 40401)

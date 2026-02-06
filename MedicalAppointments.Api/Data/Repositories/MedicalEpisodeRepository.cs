@@ -1,5 +1,6 @@
 using Dapper;
 using System.Data;
+using System.Threading.Tasks;
 
 namespace MedicalAppointments.Api.Data.Repositories
 {
@@ -12,7 +13,7 @@ namespace MedicalAppointments.Api.Data.Repositories
             _connectionFactory = connectionFactory;
         }
 
-        public void AddNotes(int medicalEpisodeId, string notes)
+        public async Task AddNotesAsync(int medicalEpisodeId, string notes)
         {
             const string sql = @"
                 -- Verificar que exista y que esté pendiente
@@ -38,7 +39,7 @@ namespace MedicalAppointments.Api.Data.Repositories
             ";
 
             using IDbConnection connection = _connectionFactory.CreateConnection();
-            connection.Execute(sql, new
+            await connection.ExecuteAsync(sql, new
             {
                 MedicalEpisodeId = medicalEpisodeId,
                 Notes = notes

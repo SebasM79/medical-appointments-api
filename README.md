@@ -38,7 +38,6 @@ acceso a datos, priorizando control total del SQL, claridad de negocio y perform
 
 - Enfoque **SQL-first**
 - Acceso a datos mediante **Dapper**
-- No se utiliza ORM (Entity Framework)
 - El esquema de base de datos se gestiona manualmente con scripts SQL
 - Separación clara de responsabilidades:
   - Controllers → HTTP / Endpoints

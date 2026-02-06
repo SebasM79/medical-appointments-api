@@ -9,18 +9,22 @@ namespace MedicalAppointments.Api.Controllers
     public class AppointmentsController : ControllerBase
     {
         private readonly MedicalRecordRepository _medicalRecordRepository;
+        private readonly AppointmentRepository _appointmentRepository;
 
-        public AppointmentsController(MedicalRecordRepository medicalRecordRepository)
+        public AppointmentsController(
+            MedicalRecordRepository medicalRecordRepository,
+            AppointmentRepository appointmentRepository)
         {
             _medicalRecordRepository = medicalRecordRepository;
+            _appointmentRepository = appointmentRepository;
         }
 
         [HttpPost("{id}/attend")]
-        public IActionResult Attend(int id, [FromBody] AttendAppointmentDto dto)
+        public async Task<IActionResult> Attend(int id, [FromBody] AttendAppointmentDto dto)
         {
             try
             {
-                var episode = _medicalRecordRepository.AttendAppointment(id, dto.DoctorId);
+                var episode = await _medicalRecordRepository.AttendAppointmentAsync(id, dto.DoctorId);
                 return Ok(episode);
             }
             catch (Exception ex)
@@ -28,6 +32,17 @@ namespace MedicalAppointments.Api.Controllers
                 return BadRequest(new { error = ex.Message });
             }
         }
+
+        [HttpGet("today")]
+        public async Task<IActionResult> GetToday()
+        {
+            var result = await _appointmentRepository.GetTodayAppointmentsAsync();
+            return Ok(result);
+        }
+        [HttpGet("ping")]
+        public IActionResult Ping()
+        {
+            return Ok("appointments controller alive");
+        }
     }
 }
- 

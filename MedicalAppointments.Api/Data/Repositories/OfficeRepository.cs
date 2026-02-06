@@ -2,6 +2,7 @@ using Dapper;
 using MedicalAppointments.Api.Models;
 using System.Collections.Generic;
 using System.Data;
+using System.Threading.Tasks;
 
 namespace MedicalAppointments.Api.Data.Repositories
 {
@@ -14,7 +15,7 @@ namespace MedicalAppointments.Api.Data.Repositories
             _connectionFactory = connectionFactory;
         }
 
-        public IEnumerable<OfficeDto> GetAll()
+        public async Task<IEnumerable<OfficeDto>> GetAllAsync()
         {
             const string sql = @"
                 SELECT
@@ -28,10 +29,10 @@ namespace MedicalAppointments.Api.Data.Repositories
             ";
 
             using IDbConnection connection = _connectionFactory.CreateConnection();
-            return connection.Query<OfficeDto>(sql);
+            return await connection.QueryAsync<OfficeDto>(sql);
         }
 
-        public int Create(CreateOfficeDto office)
+        public async Task<int> CreateAsync(CreateOfficeDto office)
         {
             const string sql = @"
                 INSERT INTO Office (description, number_office, branch_id)
@@ -41,7 +42,7 @@ namespace MedicalAppointments.Api.Data.Repositories
             ";
 
             using IDbConnection connection = _connectionFactory.CreateConnection();
-            return connection.QuerySingle<int>(sql, office);
+            return await connection.QuerySingleAsync<int>(sql, office);
         }
     }
 }

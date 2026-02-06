@@ -14,15 +14,16 @@ public class OfficesController : ControllerBase
     }
 
     [HttpGet]
-    public IActionResult GetAll()
+    public async Task<IActionResult> GetAll()
     {
-        return Ok(_officeRepository.GetAll());
+        var offices = await _officeRepository.GetAllAsync();
+        return Ok(offices);
     }
 
     [HttpPost]
-    public IActionResult Create(CreateOfficeDto office)
+    public async Task<IActionResult> Create(CreateOfficeDto office)
     {
-        var id = _officeRepository.Create(office);
+        var id = await _officeRepository.CreateAsync(office);
         return CreatedAtAction(nameof(GetAll), new { id }, new { OfficeId = id });
     }
 }
