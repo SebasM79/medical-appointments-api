@@ -14,6 +14,17 @@ builder.Services.AddSingleton<MedicalAppointments.Api.Data.DbConnectionFactory>(
 builder.Services.AddScoped<AppointmentRepository>();
 builder.Services.AddScoped<MedicalRecordRepository>();
 
+// 🔹 CORS para permitir el frontend de Vite
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.WithOrigins("http://localhost:5173")
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+
 var app = builder.Build();
 
 // 🔹 Pipeline
@@ -23,6 +34,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// CORS debe ir antes de Authorization y de MapControllers
+app.UseCors();
 
 app.UseAuthorization();
 
