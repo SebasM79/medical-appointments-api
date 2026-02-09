@@ -1,68 +1,95 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
+@layer base {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    --background: 100 40% 97%;
+    --foreground: 140 30% 12%;
+
+    --card: 100 30% 98%;
+    --card-foreground: 140 30% 12%;
+
+    --popover: 100 30% 98%;
+    --popover-foreground: 140 30% 12%;
+
+    --primary: 90 55% 45%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 100 30% 90%;
+    --secondary-foreground: 140 30% 18%;
+
+    --muted: 100 20% 93%;
+    --muted-foreground: 140 10% 45%;
+
+    --accent: 80 45% 85%;
+    --accent-foreground: 140 30% 15%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 100 20% 85%;
+    --input: 100 20% 85%;
+    --ring: 90 55% 45%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 100 25% 96%;
+    --sidebar-foreground: 140 25% 20%;
+    --sidebar-primary: 90 55% 45%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 100 30% 90%;
+    --sidebar-accent-foreground: 140 25% 15%;
+    --sidebar-border: 100 20% 88%;
+    --sidebar-ring: 90 55% 45%;
   }
-  a:hover {
-    color: #747bff;
+
+  .dark {
+    --background: 140 25% 8%;
+    --foreground: 100 20% 95%;
+
+    --card: 140 25% 10%;
+    --card-foreground: 100 20% 95%;
+
+    --popover: 140 25% 10%;
+    --popover-foreground: 100 20% 95%;
+
+    --primary: 90 55% 50%;
+    --primary-foreground: 140 30% 8%;
+
+    --secondary: 140 20% 18%;
+    --secondary-foreground: 100 20% 90%;
+
+    --muted: 140 20% 15%;
+    --muted-foreground: 100 15% 60%;
+
+    --accent: 100 25% 20%;
+    --accent-foreground: 100 20% 90%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 140 20% 18%;
+    --input: 140 20% 18%;
+    --ring: 90 55% 50%;
+
+    --sidebar-background: 140 25% 7%;
+    --sidebar-foreground: 100 20% 90%;
+    --sidebar-primary: 90 55% 50%;
+    --sidebar-primary-foreground: 140 30% 8%;
+    --sidebar-accent: 140 20% 14%;
+    --sidebar-accent-foreground: 100 20% 90%;
+    --sidebar-border: 140 20% 15%;
+    --sidebar-ring: 90 55% 50%;
   }
-  button {
-    background-color: #f9f9f9;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
   }
 }
